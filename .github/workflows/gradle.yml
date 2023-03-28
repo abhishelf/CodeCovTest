@@ -31,13 +31,13 @@ jobs:
       uses: ReactiveCircus/android-emulator-runner@v2.14.3
       with: 
           api-level: 29
-          script: ./gradlew connectedCheck
+          script: ./gradlew jacocoTestReport
       
     - name: generate report
       uses: actions/upload-artifact@v2
       with:
         name: report 
-        path: app/build/reports/jacoco/jacocoTestReport
+        path: app/build/reports/coverage/debug
             
     - name: Download Test Reports Folder
       uses: actions/download-artifact@v2
