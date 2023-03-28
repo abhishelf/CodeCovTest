@@ -19,4 +19,9 @@ class CalculatorHelperInstrumentedTest {
     fun testSubtractionMethod() {
         assertEquals(1, CalculatorHelper.subtractAndroidTest(4, 3))
     }
+
+    @Test
+    fun testMultiplicationMethod() {
+        assertEquals(12, CalculatorHelper.multiplyAndroidTest(4, 3))
+    }
 }
