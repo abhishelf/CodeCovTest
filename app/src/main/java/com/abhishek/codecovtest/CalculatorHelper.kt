@@ -13,6 +13,11 @@ object CalculatorHelper {
     fun dividerUnitTest(num1: Int, num2: Int): Int {
         return num1 / num2
     }
+    
+    fun remUnitTest(num1: Int, num2: Int): Int {
+        return num1 % num2
+    }
+    
     fun subtractUnitTest(num1: Int, num2: Int): Int {
         return num1 - num2
     }
@@ -31,5 +36,9 @@ object CalculatorHelper {
     
     fun dividerAndroidTest(num1: Int, num2: Int): Int {
         return num1 / num2
+    }
+    
+    fun remAndroidTest(num1: Int, num2: Int): Int {
+        return num1 % num2
     }
 }
