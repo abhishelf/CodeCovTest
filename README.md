@@ -1,3 +1,3 @@
 # SampleProject
 
-To Test CodeCov Plugin
+This is just to test CodeCov Plugin
