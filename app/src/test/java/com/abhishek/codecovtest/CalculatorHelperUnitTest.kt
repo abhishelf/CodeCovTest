@@ -1,0 +1,18 @@
+package com.abhishek.codecovtest
+
+import org.junit.Test
+
+import org.junit.Assert.*
+
+class CalculatorHelperUnitTest {
+
+    @Test
+    fun testAdditionMethod() {
+        assertEquals(7, CalculatorHelper.addUnitTest(3, 4))
+    }
+
+    @Test
+    fun testSubtractionMethod() {
+        assertEquals(1, CalculatorHelper.subtractUnitTest(4, 3))
+    }
+}
