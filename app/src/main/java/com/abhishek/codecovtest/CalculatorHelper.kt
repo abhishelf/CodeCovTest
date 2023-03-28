@@ -6,6 +6,10 @@ object CalculatorHelper {
         return num1 + num2
     }
 
+    fun multiplyUnitTest(num1: Int, num2: Int): Int {
+        return num1 * num2
+    }
+        
     fun subtractUnitTest(num1: Int, num2: Int): Int {
         return num1 - num2
     }
@@ -16,5 +20,9 @@ object CalculatorHelper {
 
     fun subtractAndroidTest(num1: Int, num2: Int): Int {
         return num1 - num2
+    }
+    
+    fun multiplyAndroidTest(num1: Int, num2: Int): Int {
+        return num1 * num2
     }
 }
