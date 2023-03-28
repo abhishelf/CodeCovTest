@@ -10,6 +10,7 @@ task jacocoTestReport(type: JacocoReport,
   // Enable the Format
   reports{
     html.enabled = true
+    xml.enabled = true
   }
 
   // Exluded Files
