@@ -15,4 +15,9 @@ class CalculatorHelperUnitTest {
     fun testSubtractionMethod() {
         assertEquals(1, CalculatorHelper.subtractUnitTest(4, 3))
     }
+
+    @Test
+    fun testMultiplicationMethod() {
+        assertEquals(12, CalculatorHelper.multiplyUnitTest(4, 3))
+    }
 }
