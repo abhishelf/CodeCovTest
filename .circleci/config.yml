@@ -70,7 +70,7 @@ jobs:
     parameters:
       system-image:
         type: string
-        default: ssystem-images;android-29;default;x86
+        default: system-images;android-29;default;x86
       avd-name:
         default: test
         description: |
