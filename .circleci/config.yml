@@ -71,6 +71,11 @@ jobs:
       system-image:
         type: string
         default: system-images;android-30;google_apis;x86
+      avd-name:
+        default: test
+        description: |
+          The name of the AVD to create
+        type: string
     executor:
       name: android/android-machine
       resource-class: large
@@ -78,10 +83,11 @@ jobs:
       - checkout
       - android/create-avd:
           install: false
-          avd-name: "Jacoco Testing"
+          avd-name: << parameters.avd-name>>
           system-image: << parameters.system-image >>
       - android/start-emulator:
-          avd-name: "Jacoco Testing"
+          avd-name: << parameters.avd-name>>
+          wait-for-emulator:
       - run:
           name: Generate test report
           command: |
