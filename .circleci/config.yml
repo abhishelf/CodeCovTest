@@ -70,7 +70,7 @@ jobs:
     parameters:
       system-image:
         type: string
-        default: system-images;android-29;google_apis;x86
+        default: system-images;android-30;google_apis;x86
     executor:
       name: android/android-machine
       resource-class: large
@@ -82,7 +82,6 @@ jobs:
           system-image: << parameters.system-image >>
       - android/start-emulator:
           avd-name: "Jacoco Testing"
-      - android/wait-for-emulator
       - run:
           name: Generate test report
           command: |
