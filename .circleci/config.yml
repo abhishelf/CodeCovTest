@@ -69,7 +69,7 @@ jobs:
   jacoco-report:
     executor:
       name: android/android-machine
-      resource-class: xlarge
+      resource-class: large
     steps:
       - checkout
       - android/restore-gradle-cache
