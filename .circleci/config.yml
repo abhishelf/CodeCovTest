@@ -79,7 +79,7 @@ jobs:
       - android/create-avd:
           install: false
           avd-name: "Jacoco Testing"
-          system-image: system-images;android-30;google_apis;x86
+          system-image: << parameters.system-image >>
       - android/start-emulator:
           avd-name: "Jacoco Testing"
       - android/wait-for-emulator
