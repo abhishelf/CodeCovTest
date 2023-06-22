@@ -72,8 +72,6 @@ jobs:
       resource-class: large
     steps:
       - checkout
-      - android/restore-gradle-cache
-      - android/restore-build-cache
       - run:
           name: Generate test report
           command: |
