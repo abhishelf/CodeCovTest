@@ -32,13 +32,13 @@ jobs:
     parameters:
       system-image:
         type: string
-        default: system-images;android-30;google_apis;x86
+        default: system-images;android-21;google_apis;x86
       avd-name:
         default: test
         type: string
     executor:
       name: android/android-machine
-      resource-class: xlarge
+      resource-class: large
     steps:
       - checkout
       - android/create-avd:
