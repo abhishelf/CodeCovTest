@@ -42,7 +42,7 @@ jobs:
     steps:
       - checkout
       - android/create-avd:
-          install: false
+          install: true
           avd-name: << parameters.avd-name>>
           system-image: << parameters.system-image >>
       - android/start-emulator:
