@@ -38,7 +38,7 @@ jobs:
         type: string
     executor:
       name: android/android-machine
-      resource-class: large
+      resource-class: xlarge
     steps:
       - checkout
       - android/create-avd:
