@@ -47,7 +47,7 @@ jobs:
           path: app/build/outputs/apk/release
 
 workflows:
-  test-and-build:
+  build:
     jobs:
       - jacoco-report
       - release-build:
