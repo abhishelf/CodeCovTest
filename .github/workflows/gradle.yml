@@ -48,8 +48,8 @@ jobs:
 #     - name: Upload Test Report
 #       run:  bash <(curl -s https://codecov.io/bash) -f "app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
 
-    - name: Upload Test Report
-      uses: codecov/codecov-action@v3
-      with:
-          file: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+#     - name: Upload Test Report
+#       uses: codecov/codecov-action@v3
+#       with:
+#           file: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
       
