@@ -16,6 +16,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    - run: echo "Printing Variable $TESTVARNAME"
     - uses: actions/checkout@v3
     - name: Set up JDK 11
       uses: actions/setup-java@v3
@@ -34,6 +35,7 @@ jobs:
           script: ./gradlew jacocoTestReport
       
     - name: generate report
+      if: ${{ vars.TESTVARNAME == '1' }}
       uses: actions/upload-artifact@v3
       with:
         name: report 
