@@ -16,7 +16,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: linux
+    runs-on: ubuntu-latest
 
     steps:
     - run: echo "Printing Variable $TESTVARNAME"
