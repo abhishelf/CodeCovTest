@@ -16,7 +16,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: linux
 
     steps:
     - run: echo "Printing Variable $TESTVARNAME"
