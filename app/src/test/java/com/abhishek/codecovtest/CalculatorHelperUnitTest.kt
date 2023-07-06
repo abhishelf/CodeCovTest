@@ -8,7 +8,7 @@ class CalculatorHelperUnitTest {
 
     @Test
     fun testAdditionMethod() {
-        assertEquals(8, CalculatorHelper.addUnitTest(3, 4))
+        assertEquals(7, CalculatorHelper.addUnitTest(3, 4))
     }
 
     @Test
