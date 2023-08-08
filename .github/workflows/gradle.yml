@@ -45,7 +45,7 @@ jobs:
           api-level: ${{ vars.androidApiVersion }}
           script: ./gradlew jacocoTestReport
           
-      - name: Uploading Code Coverage Report
+      - name: Uploading Coverage Report
         if: ${{ vars.codeCoverageEnabled == 'true' }}
         uses: actions/upload-artifact@v3
         with:
