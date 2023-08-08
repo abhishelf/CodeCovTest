@@ -26,9 +26,6 @@ jobs:
     needs: assemble
     runs-on: macos-latest
     steps:
-      - name: Unit Test with Android Emulator Runner
-        uses: ReactiveCircus/android-emulator-runner@v2.14.3
-        with: 
-            api-level: 29
-            script: ./gradlew test
+      - name: UnitTest
+        run: ./gradlew test
       
