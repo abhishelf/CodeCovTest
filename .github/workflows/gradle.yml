@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  PR Verification:
+  assemble:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
