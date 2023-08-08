@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  assemble:
+  PR Verification:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,20 +25,29 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: ${{ vars.gradleVersion }}
-          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/development'' }}
           gradle-home-cache-cleanup: true
           dependency-graph: generate-and-submit
           arguments: |
             assemble
-            ktlintcheck
             test
-            
-      - name: Run a build, generating the dependency graph snapshot which will be submitted
-        run: ./gradlew build
 
       - name: Android Instrumentation Test
         uses: ReactiveCircus/android-emulator-runner@v2.14.3
         with:
-          api-level: 33
+          api-level: ${{ vars.androidApiVersion }}
           script: ./gradlew connectedAndroidTest
-      
+
+      - name: Code Coverage Report
+        if: ${{ vars.codeCoverageEnabled == 'true' }}
+        uses: ReactiveCircus/android-emulator-runner@v2.14.3
+        with:
+          api-level: ${{ vars.androidApiVersion }}
+          script: ./gradlew jacocoTestReport
+          
+      - name: Uploading Code Coverage Report
+        if: ${{ vars.codeCoverageEnabled == 'true' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: app/build/reports/jacoco/jacocoTestReport
