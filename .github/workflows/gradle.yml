@@ -1,8 +1,10 @@
-name: PullRequest Verification
+name: Java CI with Gradle
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
-    branches: [ "MOEN-25997_ci_setup" ]
+    branches: [ "main" ]
 
 jobs:
   assemble:
