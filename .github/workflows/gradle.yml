@@ -25,7 +25,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: ${{ vars.gradleVersion }}
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/development'' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
           gradle-home-cache-cleanup: true
           dependency-graph: generate-and-submit
           arguments: |
