@@ -19,7 +19,6 @@ jobs:
       - name: Setup Gradle Cache
       - uses: gradle/gradle-build-action@v2
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
           gradle-home-cache-cleanup: true
       - name: Assemble Project
         run: ./gradlew assemble
