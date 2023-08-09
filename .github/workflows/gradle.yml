@@ -73,3 +73,25 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
+      - name: Instrumentation Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: ${{ matrix.arch }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: ./gradlew connectedAndroidTest
+      - name: Generating Code Coverage Report
+        if: ${{ vars.codeCoverageEnabled == 'true' }}
+        uses: ReactiveCircus/android-emulator-runner@v2.14.3
+        with:
+          api-level: ${{ matrix.api-level }}
+          script: ./gradlew jacocoTestReport
+      - name: Uploading Code Coverage Report
+        if: ${{ vars.codeCoverageEnabled == 'true' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: app/build/reports/jacoco/jacocoTestReport
