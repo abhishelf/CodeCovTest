@@ -19,3 +19,4 @@ jobs:
           gradle-home-cache-cleanup: true
       - name: Build project
         run: ./gradlew assemble
+        
