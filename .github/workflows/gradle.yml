@@ -7,7 +7,7 @@ name: Java CI with Gradle
 on: [workflow_dispatch]
 
 jobs:
-  assemble:
+  assemble-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,5 +21,20 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main'}}
           gradle-home-cache-cleanup: true
-      - name: Build project
+      - name: Assemble project
         run: ./gradlew assemble
+  jvm-verification:
+    needs: assemble-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup JDK
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+      - uses: gradle/gradle-build-action@v2
+      - name: Unit Test
+        run: ./gradlew test
+      - name: Ktlint Check
+        run: ./gradlew ktlintcheck
