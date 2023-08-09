@@ -1,4 +1,4 @@
-name: Android CI
+name: Parallel PullRequest Validation
 
 on: [workflow_dispatch]
 
