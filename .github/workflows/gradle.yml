@@ -1,4 +1,4 @@
-name: Android CI
+name: Android CI Check
 
 on: [workflow_dispatch]
 
@@ -19,4 +19,3 @@ jobs:
           gradle-home-cache-cleanup: true
       - name: Build project
         run: ./gradlew assemble
-        
