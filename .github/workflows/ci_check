@@ -1,9 +1,0 @@
-name: Android CI
-
-on: [workflow_dispatch]
-
-jobs:
-  assemble-verification:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
