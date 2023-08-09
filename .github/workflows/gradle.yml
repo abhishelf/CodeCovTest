@@ -31,7 +31,5 @@ jobs:
           java-version: 17
           distribution: 'zulu'
       - uses: gradle/gradle-build-action@v2
-      - name: build
-        run: ./gradlew build
       - name: Unit Test
         run: ./gradlew test
