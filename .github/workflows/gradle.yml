@@ -45,7 +45,8 @@ jobs:
         arch: [ x86_64 ]
         target: [ google_apis ]
         channel: [ stable ]
-        api-level: [ 26 ]
+        api-level:
+          - 26
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v3
@@ -84,7 +85,19 @@ jobs:
           disable-animations: true
           script: ./gradlew connectedAndroidTest
       - name: Generating Code Coverage Report
+        if: ${{ vars.codeCoverageEnabled == 'true' }}
         uses: ReactiveCircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: ${{ matrix.arch }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
           script: ./gradlew jacocoTestReport
+      - name: Uploading Code Coverage Report
+        if: ${{ vars.codeCoverageEnabled == 'true' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: app/build/reports/jacoco/jacocoTestReport
