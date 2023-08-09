@@ -13,7 +13,7 @@ class CalculatorHelperUnitTest {
 
     @Test
     fun testSubtractionMethod() {
-        assertEquals(1, CalculatorHelper.subtractUnitTest(4, 3))
+        assertEquals(5, CalculatorHelper.subtractUnitTest(4, 3))
     }
 
     @Test
