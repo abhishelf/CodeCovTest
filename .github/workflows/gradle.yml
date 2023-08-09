@@ -7,42 +7,53 @@ name: Java CI with Gradle
 on: [workflow_dispatch]
 
 jobs:
-  pre-verification:
+  Assemble:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: ${{ vars.gradleVersion }}
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/development'}}
-          gradle-home-cache-cleanup: true
-          arguments: assemble
-  jvm-verification:
-    needs: pre-verification
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+      - name: Setup JDK
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          java-version: 17
+          distribution: 'zulu'
+      - name: Setup Gradle Cache
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: test
-  android-verification:
-    needs: pre-verification
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/development' && github.ref != 'MOEN-25997_ci_setup'}}
+          gradle-home-cache-cleanup: true
+      - name: Assemble Project
+        run: ./gradlew assemble
+  JvmVerification:
+    needs: Assemble
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup JDK
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+      - uses: gradle/gradle-build-action@v2
+      - name: Unit Test
+        run: ./gradlew test
+  AndroidVerification:
+    needs: Assemble
     runs-on: macos-latest
     strategy:
       fail-fast: true
       matrix:
-        api-level: [ 29 ]
+        arch: [ x86_64 ]
+        target: [ google_apis ]
+        channel: [ stable ]
+        api-level:
+          - 26
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          java-version: 17
+          distribution: 'zulu'
       - uses: gradle/gradle-build-action@v2
       - name: AVD cache
         uses: actions/cache@v3
@@ -57,6 +68,8 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: ${{ matrix.arch }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
@@ -65,12 +78,17 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: ${{ matrix.arch }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
           script: ./gradlew connectedAndroidTest
       - name: Generating Code Coverage Report
         if: ${{ vars.codeCoverageEnabled == 'true' }}
         uses: ReactiveCircus/android-emulator-runner@v2.14.3
         with:
-          api-level: ${{ vars.androidApiVersion }}
+          api-level: ${{ matrix.api-level }}
           script: ./gradlew jacocoTestReport
       - name: Uploading Code Coverage Report
         if: ${{ vars.codeCoverageEnabled == 'true' }}
