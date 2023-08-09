@@ -83,3 +83,9 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: ./gradlew connectedAndroidTest
+      - name: Generating Code Coverage Report
+        if: ${{ vars.codeCoverageEnabled == 'true' }}
+        uses: ReactiveCircus/android-emulator-runner@v2.14.3
+        with:
+          api-level: ${{ matrix.api-level }}
+          script: ./gradlew jacocoTestReport
