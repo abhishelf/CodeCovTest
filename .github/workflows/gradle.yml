@@ -23,4 +23,16 @@ jobs:
           gradle-home-cache-cleanup: true
       - name: Assemble Project
         run: ./gradlew assemble
-        
+  jvm-verification:
+    needs: assemble
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup JDK
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+      - uses: gradle/gradle-build-action@v2
+      - name: Unit Test
+        run: ./gradlew test
