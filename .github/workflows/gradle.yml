@@ -33,5 +33,3 @@ jobs:
       - uses: gradle/gradle-build-action@v2
       - name: Unit Test
         run: ./gradlew test
-      - name: Assemble Test
-        run: ./gradlew build
