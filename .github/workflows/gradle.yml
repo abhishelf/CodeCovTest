@@ -84,8 +84,7 @@ jobs:
           disable-animations: true
           script: ./gradlew connectedAndroidTest
       - name: Generating Code Coverage Report
-        if: ${{ vars.codeCoverageEnabled == 'true' }}
-        uses: ReactiveCircus/android-emulator-runner@v2.14.3
+        uses: ReactiveCircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
           script: ./gradlew jacocoTestReport
